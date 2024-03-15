@@ -26,9 +26,10 @@ const Register = () => {
       .then((err) => console.log(err));
   };
   return (
-    <div className="login-container">
+   <div className="outer-login-container">
+     <div className="login-container">
       <h1 className="login-heading">Register</h1>
-      <form action="/register" method="POST" onSubmit={handleSubmit}>
+      <form action="/register" method="POST" onSubmit={handleSubmit} className="lform-container">
         <div className="form-group">
           <label className="login-form-label"  htmlFor="userName">Username</label>
           <input className="login-form-input"
@@ -36,7 +37,7 @@ const Register = () => {
             type="text"
             id="userName"
             name="userName"
-            placeholder="Username"
+            placeholder="Enter Username...."
             required
           />
         </div>
@@ -48,7 +49,7 @@ const Register = () => {
             type="email"
             id="Email"
             name="email"
-            placeholder="Email"
+            placeholder="Enter your Email...."
             required
           />
         </div>
@@ -61,7 +62,7 @@ const Register = () => {
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
+            placeholder="Enter a Password..."
             required
           />
         </div>
@@ -73,6 +74,7 @@ const Register = () => {
         </Link>
       </form>
     </div>
+   </div>
   );
 };
 

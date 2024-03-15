@@ -28,9 +28,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="outer-login-container">
+      <div className="login-container">
       <h1 className="login-heading">Login</h1>
-      <form action="/login" method="POST" onSubmit={handleSubmit}>
+      <form action="/login" method="POST" onSubmit={handleSubmit} className="lform-container">
         <div className="form-group">
           <label className="login-form-label" htmlFor="email">Email</label>
           <input className="login-form-input"
@@ -38,18 +39,18 @@ const Login = () => {
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder="Enter your Email...."
             required
           />
         </div>
         <div className="form-group">
-          <label className="login-form-label"  htmlFor="password">Password:</label>
+          <label className="login-form-label"  htmlFor="password">Password</label>
           <input className="login-form-input"
             onChange={(e) => setValues({ ...values, password: e.target.value })}
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
+            placeholder="Enter your Password..."
             required
           />
         </div>
@@ -60,6 +61,7 @@ const Login = () => {
           <h4 className="signin-page">Not Registered </h4>
         </Link>
       </form>
+    </div>
     </div>
   );
 };

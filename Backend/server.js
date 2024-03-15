@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 const port = 5000;
 const salt = 10;
-
+const SECRET_KEY = "This is Rental App"
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -35,7 +35,7 @@ const verifyUser = (req, res, next) => {
   if (!token) {
     return res.json({ Error: "you are not authenticated" });
   } else {
-    jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
       if (err) {
         return res.json({ Error: "Token is not correct" });
       } else {
@@ -90,7 +90,7 @@ app.post("/login", (req, res) => {
         }
         if (response) {
           const name = user.name;
-          const token = jwt.sign({ name }, "jwt-secret-key", {
+          const token = jwt.sign({ name }, SECRET_KEY, {
             expiresIn: "1d",
           });
           res.cookie("token", token);
