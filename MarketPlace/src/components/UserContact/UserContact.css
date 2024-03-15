@@ -9,7 +9,7 @@
   input,
   textarea {
     text-transform: capitalize;
-    font-family: "Itim", cursive;
+    font-family: "Merriweather", sans-serif;
     font-weight: 500;
     font-style: normal;
     border: 0;
@@ -19,7 +19,7 @@
     display: block;
     width: 100%;
     margin-top: 1em;
-    font-family: "Merriweather", sans-serif;
+   
     box-shadow: 0 3px 5px rgb(207, 204, 204);
     resize: none;
 

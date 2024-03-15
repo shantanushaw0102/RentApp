@@ -6,9 +6,9 @@ import Products from "./productpage/Products";
 import Contact from "./Contact";
 import Header from "./Header";
 import Register from "./LoginFrom/Register";
-import Login from "./LoginFrom/Login"
+import Login from "./LoginFrom/Login";
 import Footer from "./Footer";
-
+import MyFooter from "./MyFooter";
 import ErrorPage from "./ErrorPage";
 import SingleProduct from "./productpage/SingleProduct/SingleProduct";
 import "../styles/globalstyle.css";
@@ -26,9 +26,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="*" element={<ErrorPage />} />
-        
       </Routes>
-    <Footer />
+      <MyFooter />
     </Router>
   );
 };
