@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { RentItems, NewArrivedItems } from "./CarouselCard";
@@ -27,26 +28,36 @@ function CarouselElement() {
       items: 1,
     },
   };
-  const mostRented = ProductItem.filter((item) => item.most === true);
-  const rentProduct = mostRented.map((item) => (
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/display")
+      .then((res) => setData(res.data.rows))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const mostRented = data.filter((item) => item.most_rented === true);
+  const rentProduct = mostRented.map((item, index) => (
     <RentItems
-      key={item.id}
+      key={index}
       id={item.id}
-      img={item.imgUrl1}
-      name={item.name}
-      rentPrice={item.price}
-      desc={item.desc}
+      name={item.p_name}
+      price={item.p_price}
+      desc={item.p_description}
+      img={`http://localhost:5000/images/${item.p_image}`}
     />
   ));
-  const newArrival = ProductItem.filter((item) => item.fresh === true);
-  const newProduct = newArrival.map((item) => (
+  const newArrival = data.filter((item) => item.new_product === true);
+  const newProduct = newArrival.map((item, index) => (
     <NewArrivedItems
-      key={item.id}
+      key={index}
       id={item.id}
-      img={item.imgUrl1}
-      name={item.name}
-      rentPrice={item.price}
-      desc={item.desc}
+      name={item.p_name}
+      price={item.p_price}
+      desc={item.p_description}
+      img={`http://localhost:5000/images/${item.p_image}`}
     />
   ));
   return (

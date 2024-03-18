@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import BrandLogo1 from "../assets/BrandLogo1.png";
 
 const BrandImage = () => {
   return (
     <div>
       <Link to="/">
-        <img src={logo} alt="" />
+        <img src={BrandLogo1} alt="" />
       </Link>
     </div>
   );

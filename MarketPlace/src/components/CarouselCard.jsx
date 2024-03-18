@@ -8,7 +8,7 @@ function RentItems(props) {
         <img className="product-image" src={props.img} alt="image" />
       </Link>
       <h2>{props.name}</h2>
-      <p className="product-price"> ₹ {props.rentPrice}</p>
+      <p className="product-price"> ₹ {props.price}</p>
       <p className="product-desc">{props.desc.substring(0, 120)}</p>
     </div>
   );

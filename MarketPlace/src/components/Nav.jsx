@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import logo from "../assets/logo.png";
+import BrandImage from "./BrandImage";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -47,11 +47,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div>
-          <NavLink to="/">
-            <img src={logo} alt="" />
-          </NavLink>
-        </div>
+        <BrandImage />
         <div className="menu-icon" onClick={handleShowNavbar}>
           <GiHamburgerMenu />
         </div>
@@ -72,19 +68,32 @@ const Navbar = () => {
             </li>
 
             <li>
-            {auth ? (
-              <li className="admin"> 
-               <span><FaUserCircle className="admin-icon" /></span>
-                <span className="admin-name">{name}</span>
-                <NavLink onClick={handleDelete}>
-                  <RiLogoutCircleRLine className="logout-icon" title="logout"/>
-                </NavLink>
-              </li>
-            ) : (
-              <li> 
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            )}
+              {auth ? (
+                (<li>
+                  <NavLink to="/addproduct">Add Product</NavLink>
+                </li>)
+              ) : null}
+            </li>
+
+            <li>
+              {auth ? (
+                <li className="admin">
+                  <span>
+                    <FaUserCircle className="admin-icon" />
+                  </span>
+                  <span className="admin-name">{name}</span>
+                  <NavLink onClick={handleDelete}>
+                    <RiLogoutCircleRLine
+                      className="logout-icon"
+                      title="logout"
+                    />
+                  </NavLink>
+                </li>
+              ) : (
+                <li>
+                  <NavLink to="/login">Login</NavLink>
+                </li>
+              )}
             </li>
           </ul>
         </div>

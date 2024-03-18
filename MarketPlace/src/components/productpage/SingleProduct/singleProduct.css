@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Barriecito&family=Concert+One&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Revolution&family=Righteous&display=swap");
+
+
+
 .pm-container{
   line-height: 1;
 }
@@ -106,6 +107,10 @@
 }
 .p-renter {
   text-transform: capitalize;
+  color: rgb(61, 58, 58);
+}
+.p-location{
+  
   color: rgb(61, 58, 58);
 }
 .p-renter span {

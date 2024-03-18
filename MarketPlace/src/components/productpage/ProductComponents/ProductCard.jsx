@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import ChatForm from "./ChatForm";
+import { AiFillStar } from "react-icons/ai";
 
 const ProductCard = ({
   id,
@@ -32,7 +33,7 @@ const ProductCard = ({
 
       <div className="pc-details">
         <h3 className="pc-title">
-          Title : <span>{name}</span>{" "}
+          Title : <span>{name}</span>
         </h3>
         <h3 className="pc-brand">
           Brand : <span>{brand}</span>
@@ -42,9 +43,11 @@ const ProductCard = ({
         </h3>
 
         <h3 className="pc-reviews">
-          Ratings :{" "}
+          Ratings :
           <span>
-            {star} {star} {star} {star}
+            <AiFillStar className="rating-star" />
+            <AiFillStar className="rating-star" />
+            <AiFillStar className="rating-star" />
           </span>
           <span className="pc-total-reviews">{reviews}</span>
         </h3>
