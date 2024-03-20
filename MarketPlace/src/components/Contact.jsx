@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <>
       <div className="heading">
-        <h2 class="contact">Contact Us</h2>
+        <h2 className="contact">Contact Us</h2>
       </div>
       <div className="map">
         <iframe

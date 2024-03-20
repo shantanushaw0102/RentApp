@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import "./singleProduct.css";
 import { FaBackward } from "react-icons/fa";
 import axios from "axios";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import ChatForm from "../ProductComponents/ChatForm";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -27,6 +29,17 @@ const SingleProduct = () => {
       setRelatedProduct(filterCategory);
     }
   }, [id, data]);
+
+  const [showChatForm, setShowChatForm] = useState(false);
+
+  const openChatForm = () => {
+    setShowChatForm(true);
+  };
+
+  const closeChatForm = () => {
+    setShowChatForm(false);
+  };
+
 
   return (
     <>
@@ -56,6 +69,13 @@ const SingleProduct = () => {
             <Link to="/products">
               <FaBackward title="back to product" className="back-button" />
             </Link>
+
+            <IoChatbubbleEllipsesOutline
+            className="sp-icon"
+            title="Chat"
+            onClick={showChatForm ? closeChatForm : openChatForm}
+          />
+          {showChatForm && <ChatForm />}
           </div>
         </div>
       </div>

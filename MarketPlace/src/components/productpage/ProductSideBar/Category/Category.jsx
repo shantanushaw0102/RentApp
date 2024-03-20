@@ -22,6 +22,11 @@ const Category = ({ handleChange }) => {
             name="test"
           />
           <Input handleChange={handleChange}
+            value="cycle"
+            title="Cycle"
+            name="test"
+          />
+          <Input handleChange={handleChange}
             value="furniture"
             title="Furniture"
             name="test"
@@ -37,7 +42,7 @@ const Category = ({ handleChange }) => {
             name="test"
           />
           <Input handleChange={handleChange}
-            value="Property"
+            value="property"
             title="Property"
             name="test"
           />

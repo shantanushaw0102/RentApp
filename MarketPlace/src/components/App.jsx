@@ -8,6 +8,7 @@ import Header from "./Header";
 import Register from "./LoginFrom/Register";
 import Login from "./LoginFrom/Login";
 import AddProductFrom from "./AddProduct/AddProductFrom";
+import RentOut from "./AddProduct/RentOut";
 import Footer from "./Footer";
 import ErrorPage from "./ErrorPage";
 import SingleProduct from "./productpage/SingleProduct/SingleProduct";
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/addproduct" element={<AddProductFrom />} />
+        <Route path="/rentout" element={<RentOut />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

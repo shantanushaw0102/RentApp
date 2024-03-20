@@ -17,6 +17,7 @@ const AddProductFrom = () => {
   const [review, setReview] = useState();
   const [comments, setComments] = useState();
   const [image, setImage] = useState();
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
   const handleSubmit = () => {
     const formData = new FormData();
@@ -33,15 +34,37 @@ const AddProductFrom = () => {
     formData.append("review", review);
     formData.append("comments", comments);
     formData.append("image", image);
-    axios.post("http://localhost:5000/upload", formData)
+
+    axios
+      .post("http://localhost:5000/upload", formData)
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log("Succeeded");
+          setSuccessMessageVisible(true);
+          setTimeout(() => {
+            setSuccessMessageVisible(false);
+          }, 5000);
+         
+          // Reset all state variables
+          setCategory("");
+          setName("");
+          setType("");
+          setBrand("");
+          setModel("");
+          setSeller("");
+          setLocation("");
+          setYear("");
+          setPrice("");
+          setDesc("");
+          setReview("");
+          setComments("");
+          setImage(null);
         } else {
           console.log("failed");
         }
       })
       .catch((err) => console.log(err));
+      window.location.reload(true);
   };
 
   return (
@@ -216,6 +239,9 @@ const AddProductFrom = () => {
           </div>
         </div>
       </div>
+      {successMessageVisible && (
+        <div className="success-message">Message sent successfully!</div>
+      )}
     </>
   );
 };

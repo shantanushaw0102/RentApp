@@ -9,7 +9,7 @@ const ProductCard = ({
   name,
   img,
   price,
-  star,
+  model,
   reviews,
   brand,
   seller,
@@ -37,6 +37,9 @@ const ProductCard = ({
         </h3>
         <h3 className="pc-brand">
           Brand : <span>{brand}</span>
+        </h3>
+        <h3 className="pc-model">
+          Model : <span>{model}</span>
         </h3>
         <h3 className="pc-type">
           Type : <span>{type}</span>

@@ -174,7 +174,7 @@ app.post("/upload", uploadFile.single("image"), (req, res) => {
 
 // fetching data from the db for displaying
 app.get("/display", (req, res) => {
-  db.query("SELECT * FROM  product_data", (err, result) => {
+  db.query("SELECT * FROM  product_data   order by id asc", (err, result) => {
     if (err) return res.json("Error");
     return res.json(result);
   });

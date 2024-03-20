@@ -40,3 +40,30 @@ body {
 .grid-five-column {
   grid-template-columns: repeat(5, 1fr);
 }
+
+.success-message {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ce1a7d;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

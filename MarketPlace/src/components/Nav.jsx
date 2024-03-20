@@ -72,7 +72,11 @@ const Navbar = () => {
                 (<li>
                   <NavLink to="/addproduct">Add Product</NavLink>
                 </li>)
-              ) : null}
+              ) : (
+                <li>
+                  <NavLink to = "/rentout">Rent Out</NavLink>
+                </li>
+              )}
             </li>
 
             <li>

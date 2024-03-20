@@ -18,7 +18,7 @@ const Recommended = ({ handleClick }) => {
         />
         <RecommendedButton
           onClickHandler={handleClick}
-          value="tata punch ev"
+          value="tata punch"
           title="Tata Punch"
         />
         <RecommendedButton

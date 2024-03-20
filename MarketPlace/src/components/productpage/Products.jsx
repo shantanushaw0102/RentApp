@@ -62,16 +62,17 @@ const Products = () => {
     }
 
     return filteredProducts.map(
-      ({ id, p_image, p_name, p_reviews, p_price, p_brand, p_seller, p_type }) => (
+      ({ id, p_image, p_name, p_reviews, p_price, p_brand, p_model, p_seller, p_type }) => (
         <ProductCard
           key={id}
           id={id}
           img={`http://localhost:5000/images/${p_image}`}
           name={p_name}
-          // star={star}
+         
           reviews={p_reviews}
           price={p_price}
           brand={p_brand}
+          model = {p_model}
           seller={p_seller}
           type={p_type}
         />
