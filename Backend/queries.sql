@@ -11,36 +11,56 @@ CREATE TABLE login (
 /* sql query for the products */
 
 CREATE TABLE product_data(
-    id serial primary key,
-    category varchar(50),
-    product_name varchar(50),
-    type varchar(50),
-    brand varchar(50),
-    model varchar(50),
-    seller varchar(50),
-    location varchar(50),
-    year varchar(10),
-    price varchar(20),
-    description text,
-    reviews varchar(50),
-    comments text,
-    image varchar(100)
+    p_id serial primary key,
+    p_category varchar(50),
+    p_product_name varchar(50),
+    p_type varchar(50),
+    p_brand varchar(50),
+    p_model varchar(50),
+    p_seller varchar(50),
+    p_location varchar(50),
+    p_year varchar(10),
+    p_price varchar(20),
+    p_description text,
+    p_reviews varchar(50),
+    p_comments text,
+    p_image varchar(100)
+);
+
+CREATE TABLE user_product_data(
+    s_id serial primary key,
+    s_username varchar(50),
+    s_email_id varchar(50),
+    s_phone varchar(20),
+    s_address text,
+    p_category varchar(50),
+    p_product_name varchar(50),
+    p_type varchar(50),
+    p_brand varchar(50),
+    p_model varchar(50),
+    p_location varchar(50),
+    p_year varchar(10),
+    p_price varchar(20),
+    p_description text,
+    p_image varchar(100)
+);
+
+CREATE TABLE user_chat(
+    u_id serial primary key,
+    u_username varchar(50),
+    u_email_id varchar(50),
+    u_phone varchar(20),
+    p_product_name varchar(50),
+    p_brand varchar(50),
+    p_model varchar(50),
+    u_message text
 );
 
 
-  <RentItems
-            key={index}
-            category={item.p_category}
-            name={item.p_name}
-            type={item.p_type}
-            brand={item.p_brand}
-            model = {item.p_model}
-            seller = {item.p_seller}
-            location = {item.p_location}
-            year ={item.p_year}
-            price ={item.p_price}
-            desc = {item.p_description}
-            review = {item.p_reviews}
-            comments = {item.p_comments}
-            img={`http://localhost:5000/images/${item.p_image}`}
-          />
+CREATE TABLE user_chat(
+    u_id serial primary key,
+    u_username varchar(50),
+    u_email_id varchar(50),
+    u_phone varchar(20),
+    comments text
+);

@@ -10,11 +10,7 @@ import "../styles/navbar.css";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
-
-  const handleShowNavbar = () => {
-    setShowNavbar(!showNavbar);
-  };
-
+  const [showDropdown, setShowDropdown] = useState(false);
   const [auth, setAuth] = useState(false);
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
@@ -32,8 +28,19 @@ const Navbar = () => {
           setMessage(res.data.Error);
         }
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   }, []);
+
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar);
+  };
+
+  const handleAddProductClick = (event) => {
+    if (name !== "shantanu0102") {
+      alert("You are not admin");
+      event.preventDefault();
+    }
+  };
 
   const handleDelete = () => {
     axios
@@ -69,13 +76,19 @@ const Navbar = () => {
 
             <li>
               {auth ? (
-                (<li>
-                  <NavLink to="/addproduct">Add Product</NavLink>
-                </li>)
+                <>
+                  <div className="add-rent">
+                  <li>
+                    <NavLink to="/addproduct" onClick={handleAddProductClick}>Add Product</NavLink>
+                  </li>
+                  <li>
+                    
+                    <NavLink to="/rentout">Rent Out</NavLink>
+                  </li>
+                  </div>
+                </>
               ) : (
-                <li>
-                  <NavLink to = "/rentout">Rent Out</NavLink>
-                </li>
+                <li></li>
               )}
             </li>
 
@@ -95,7 +108,18 @@ const Navbar = () => {
                 </li>
               ) : (
                 <li>
-                  <NavLink to="/login">Login</NavLink>
+                  <div
+                    className="login-dropdown"
+                    onClick={() => setShowDropdown(!showDropdown)}
+                  >
+                    Login
+                    {showDropdown && (
+                      <div className="dropdown-content">
+                        <NavLink to="/userlogin">User Login</NavLink>
+                        <NavLink to="/adminlogin">Admin Login</NavLink>
+                      </div>
+                    )}
+                  </div>
                 </li>
               )}
             </li>

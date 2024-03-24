@@ -1,46 +1,64 @@
-import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState } from "react";
+import axios from "axios";
 
 const ChatForm = () => {
-  const form = useRef();
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [name, setName] = useState();
+  const [brand, setBrand] = useState();
+  const [model, setModel] = useState();
+  const [message, setMessage] = useState();
   const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    const formData = {
+      username: username,
+      email: email,
+      phone: phone,
+      name: name,
+      brand: brand,
+      model: model,
+      message: message,
+    };
 
-    const serviceId = "service_0s2xjvi";
-    const templateId = "template_peis31l";
-    const publicKey = "OWztFEA4O6Nc_6X5X";
-
-    emailjs
-      .sendForm(serviceId, templateId, form.current, {
-        publicKey: publicKey,
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
+    axios
+      .post("http://localhost:5000/userchat", formData)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          console.log("Succeeded");
           setSuccessMessageVisible(true);
           setTimeout(() => {
             setSuccessMessageVisible(false);
-          }, 5000); // Hide the success message after 5 seconds
-          form.current.reset(); // Clear the form fields
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
+            setUsername("");
+            setEmail("");
+            setPhone("");
+            setName("");
+            setBrand("");
+            setModel("");
+            setMessage("");
+            window.location.reload(true); // Reload the window after hiding success message
+          }, 5000);
+        } else {
+          console.log("Failed");
         }
-      );
+      })
+      .catch((err) => console.log(err));
   };
+
+  
   return (
     <>
       <div className="chatform-container chat-form">
-        <form className="chatform-form" ref={form} onSubmit={sendEmail}>
+        <form className="chatform-form" onSubmit={handleSubmit}>
           <div className="chatform-inputs">
             <input
               type="text"
-              placeholder="username"
+              placeholder="Username"
               name="username"
               required
               autoComplete="off"
+              onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="email"
@@ -48,13 +66,40 @@ const ChatForm = () => {
               placeholder="Email"
               autoComplete="off"
               required
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="tel"
               name="phone"
-              placeholder="phone.No"
+              placeholder="Phone.No"
               autoComplete="off"
               required
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <input
+              type="text"
+              name="pname"
+              placeholder="Product name"
+              autoComplete="off"
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="text"
+              name="brand"
+              placeholder="Product brand"
+              autoComplete="off"
+              required
+              onChange={(e) => setBrand(e.target.value)}
+            />
+
+            <input
+              type="text"
+              name="model"
+              placeholder="Product model"
+              autoComplete="off"
+              required
+              onChange={(e) => setModel(e.target.value)}
             />
             <textarea
               name="message"
@@ -63,6 +108,7 @@ const ChatForm = () => {
               rows="10"
               required
               autoComplete="off"
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
             <input type="submit" value="Submit" className="chatform-submit" />
           </div>

@@ -54,7 +54,10 @@ app.get("/", verifyUser, (req, res) => {
   return res.json({ Status: "Success", name: req.name });
 });
 
-app.post("/register", (req, res) => {
+
+// admin register
+
+app.post("/adminregister", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
@@ -65,7 +68,7 @@ app.post("/register", (req, res) => {
     } else {
       console.log("Hashed Password:", hash);
       db.query(
-        "INSERT INTO login(name,email,password) VALUES ($1,$2,$3)",
+        "INSERT INTO admin_login(name,email,password) VALUES ($1,$2,$3)",
         [name, email, hash],
         (err, result) => {
           if (err) {
@@ -78,10 +81,76 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+// admin login
+
+app.post("/adminlogin", (req, res) => {
   const email = req.body.email;
   const loginPassword = req.body.password;
-  db.query("SELECT * FROM login WHERE email = $1", [email], (err, data) => {
+  db.query("SELECT * FROM admin_login WHERE email = $1", [email], (err, data) => {
+    if (err) {
+      return res.json({ Error: "Login error in server" });
+    }
+    if (data.rows.length > 0) {
+      const user = data.rows[0];
+      const storedHashedPassword = user.password;
+      bcrypt.compare(loginPassword, storedHashedPassword, (err, response) => {
+        if (err) {
+          return res.json({ Error: "Password compare error" });
+        }
+        if (response) {
+          const name = user.name;
+          const token = jwt.sign({ name }, SECRET_KEY, {
+            expiresIn: "1d",
+          });
+          res.cookie("token", token);
+          return res.json({ Status: "Success" });
+        } else {
+          return res.json({ Error: "Password not matched" });
+        }
+      });
+    } else {
+      return res.json({ Error: "no email existed" });
+    }
+  });
+});
+
+
+
+
+
+
+// register for user login
+
+app.post("/userregister", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  bcrypt.hash(password, salt, (err, hash) => {
+    if (err) {
+      return res.json({ Error: "Error for hashing password" });
+    } else {
+      console.log("Hashed Password:", hash);
+      db.query(
+        "INSERT INTO user_login(name,email,password) VALUES ($1,$2,$3)",
+        [name, email, hash],
+        (err, result) => {
+          if (err) {
+            return res.json({ Error: "Inserting data error in server" });
+          }
+          return res.json({ Status: "Success" });
+        }
+      );
+    }
+  });
+});
+
+// user login
+
+app.post("/userlogin", (req, res) => {
+  const email = req.body.email;
+  const loginPassword = req.body.password;
+  db.query("SELECT * FROM user_login WHERE email = $1", [email], (err, data) => {
     if (err) {
       return res.json({ Error: "Login error in server" });
     }
@@ -132,7 +201,7 @@ const uploadFile = multer({
   storage: storage,
 });
 
-// upload data in data base.
+// upload product data in data base.
 
 app.post("/upload", uploadFile.single("image"), (req, res) => {
   const category = req.body.category;
@@ -178,6 +247,88 @@ app.get("/display", (req, res) => {
     if (err) return res.json("Error");
     return res.json(result);
   });
+});
+
+// upload user_product listing in the db
+
+app.post("/userproduct", uploadFile.single("image"), (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const address = req.body.address;
+  const category = req.body.category;
+  const name = req.body.name;
+  const type = req.body.type;
+  const brand = req.body.brand;
+  const model = req.body.model;
+  const location = req.body.location;
+  const year = req.body.year;
+  const price = req.body.price;
+  const desc = req.body.desc;
+  const image = req.file.filename;
+
+  db.query(
+    "INSERT INTO user_product_data (s_username,s_email_id,s_phone,s_address,p_category,p_product_name,p_type,p_brand,p_model,p_location,p_year,p_price,p_description,p_image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
+    [
+      username,
+      email,
+      phone,
+      address,
+      category,
+      name,
+      type,
+      brand,
+      model,
+      location,
+      year,
+      price,
+      desc,
+      image,
+    ],
+    (err, result) => {
+      if (err) return res.json({ Message: "Error" });
+      return res.json({ Status: "Success" });
+    }
+  );
+});
+
+// upload user chat with the seller in db.
+
+app.post("/userchat", (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const name = req.body.name;
+  const brand = req.body.brand;
+  const model = req.body.model;
+  const message = req.body.message;
+
+  db.query(
+    "INSERT INTO user_chat (u_username,u_email_id,u_phone,p_product_name,p_brand,p_model,u_message) VALUES ($1,$2,$3,$4,$5,$6,$7)",
+    [username, email, phone, name, brand, model, message],
+    (err, result) => {
+      if (err) return res.json({ Message: "Error" });
+      return res.json({ Status: "Success" });
+    }
+  );
+});
+
+// upload user comments and feedback in db
+
+app.post("/feedback", (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const comments = req.body.comments;
+
+  db.query(
+    "INSERT INTO user_feedback_queries (u_username,u_email_id,u_phone,comments) VALUES ($1,$2,$3,$4)",
+    [username, email, phone, comments],
+    (err, result) => {
+      if (err) return res.json({ Message: "Error" });
+      return res.json({ Status: "Success" });
+    }
+  );
 });
 
 //starting the server

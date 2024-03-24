@@ -1,75 +1,78 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./UserContact.css";
-import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 const UserContact = () => {
-  const form = useRef();
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [comments, setComments] = useState();
   const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    const formData = {
+      username: username,
+      email: email,
+      phone: phone,
+      comments: comments,
+    };
 
-    const serviceId = "service_t1xtaeu";
-    const templateId = "template_dif6vtd";
-    const publicKey = "v252pa6wq8Jz9WdXo";
-
-    emailjs
-      .sendForm(serviceId, templateId, form.current, {
-        publicKey: publicKey,
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
+    axios
+      .post("http://localhost:5000/feedback", formData)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          console.log("Succeeded");
           setSuccessMessageVisible(true);
           setTimeout(() => {
             setSuccessMessageVisible(false);
-          }, 5000); // Hide the success message after 5 seconds
-          form.current.reset(); // Clear the form fields
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
+            setUsername("");
+            setEmail("");
+            setPhone("");
+            setComments("");
+            window.location.reload(true);
+          }, 5000);
+        } else {
+          console.log("Failed");
         }
-      );
+      })
+      .catch((err) => console.log(err));
   };
-
   return (
     <>
-      <form className="cf-container" ref={form} onSubmit={sendEmail}>
+      <div className="cf-container">
         <div className="half left cf">
           <input
             type="text"
             placeholder="username"
             name="username"
-            required
-            autoComplete="off"
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
-            autoComplete="off"
-            required
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="tel"
             name="phone"
             placeholder="phone.No"
-            autoComplete="off"
-            required
+            onChange={(e) => setPhone(e.target.value)}
           />
         </div>
         <div className=" message half right cf">
           <textarea
-            name="message"
-            placeholder="Enter your Message"
+            name="comments"
+            placeholder="Enter your comments & queries......"
             cols="30"
             rows="10"
-            required
-            autoComplete="off"
+            onChange={(e) => setComments(e.target.value)}
           ></textarea>
         </div>
-        <input type="submit" value="Submit" className="cf-submit" />
-      </form>
+        <button className="cf-submit" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
 
       {successMessageVisible && (
         <div className="success-message">Message sent successfully!</div>
