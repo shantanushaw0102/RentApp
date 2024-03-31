@@ -7,12 +7,12 @@
   padding: 20px;
   z-index: 999;
   margin-left: 3rem;
-  width: 100%;
+  
 }
 .p-search-title{
   font-size: 1.2rem;
   padding-right: 10px;
-  padding-left: 25px;
+  padding-left: 60px;
   text-transform: uppercase;
   font-family: "Itim", cursive;
   font-weight: 400;

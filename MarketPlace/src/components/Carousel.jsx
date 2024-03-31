@@ -91,6 +91,8 @@ function CarouselElement() {
           {newProduct}
         </Carousel>
       </div>
+
+      
     </>
   );
 }

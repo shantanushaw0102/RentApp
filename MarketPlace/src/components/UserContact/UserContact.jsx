@@ -69,10 +69,11 @@ const UserContact = () => {
             onChange={(e) => setComments(e.target.value)}
           ></textarea>
         </div>
-        <button className="cf-submit" onClick={handleSubmit}>
+        <button className="cf-btn" onClick={handleSubmit}>
           Submit
         </button>
       </div>
+      
 
       {successMessageVisible && (
         <div className="success-message">Message sent successfully!</div>

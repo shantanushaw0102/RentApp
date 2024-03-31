@@ -1,3 +1,6 @@
+import veer from "../assets/veer.jpg";
+
+
 const TeamDetails = [
   {
     id: 1,
@@ -12,8 +15,7 @@ const TeamDetails = [
   },
   {
     id: 2,
-    imgUrl:
-      "https://media.licdn.com/dms/image/D5603AQHwNgPZ-8Kg7A/profile-displayphoto-shrink_400_400/0/1678471155887?e=2147483647&v=beta&t=RVSdek9NadAg8lHGX_AvAyR1UjweXE5c9HcQYDX1Yq8",
+    imgUrl:veer,
     name: "Shoorveer shah",
     role: "developer",
     about:"  Welcome to RentEase, where convenience meets affordability! We area passionate team of college students dedicated to revolutionizingthe way people access the items they need. Our journey began inthe halls of academia, where we identified a common challenge: the",

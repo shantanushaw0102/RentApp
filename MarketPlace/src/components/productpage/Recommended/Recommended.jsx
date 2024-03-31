@@ -16,6 +16,11 @@ const Recommended = ({ handleClick }) => {
           value="electric"
           title="Electric Vehicle"
         />
+         <RecommendedButton
+          onClickHandler={handleClick}
+          value="petrol"
+          title="Petrol Vehicle"
+        />
         <RecommendedButton
           onClickHandler={handleClick}
           value="tata punch"

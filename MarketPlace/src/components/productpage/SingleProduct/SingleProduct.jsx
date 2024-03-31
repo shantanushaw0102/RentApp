@@ -31,9 +31,29 @@ const SingleProduct = () => {
   }, [id, data]);
 
   const [showChatForm, setShowChatForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000")
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+          setMessage(res.data.Error);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const openChatForm = () => {
-    setShowChatForm(true);
+    if (isLoggedIn) {
+      setShowChatForm(true);
+    } else {
+      alert("Please login first");
+    }
   };
 
   const closeChatForm = () => {

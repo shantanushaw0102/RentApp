@@ -107,37 +107,39 @@
   font-size: 1.3rem;
   font-weight: bolder;
   color: #ffffff;
-  
 }
 
-
 .dropdown-content {
-  font-size: 0.5rem;
   display: none;
   position: absolute;
-  background-color: #787373;
+  background-color: #ffcff4;
   border-radius: 5px;
-  min-width: 120px; /* Smaller width */
-  box-shadow: 0px 8px 16px 0px rgb(87, 84, 84);
+  min-width: 140px; /* Smaller width */
+  box-shadow: 0px 3px 2px 2px rgb(87, 84, 84);
+  font-family: "Righteous", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
 }
 
 .dropdown-content a {
-  color: rgb(43, 21, 142); /* Adjust font color */
+  color: rgb(43, 21, 142) !important; /* Adjust font color */
   padding: 8px 12px; /* Adjust padding */
   text-decoration: none;
   display: block;
+  font-size: 1rem !important ;
 }
 
 .dropdown-content a:hover {
-  background-color: #545454; /* Adjust hover background color */
-  border-radius: 5px;
+  background-color: #d9d9d9; 
+  color:#604d18 !important;
+    border-radius: 5px;
 }
 
 .login-dropdown:hover .dropdown-content {
   display: block;
 }
 
-.add-rent{
+.add-rent {
   display: flex;
   padding-right: 10px;
 }

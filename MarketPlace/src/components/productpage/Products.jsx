@@ -83,9 +83,9 @@ const Products = () => {
   const result = filteredData(data, selectedCategory, query);
 
   return (
-    <div className="main-product-container">
-      <SideBar handleChange={handleChange} />
-      <ProductNav query={query} handleInputChange={handleInputChange} />
+    <div className = "main-product-container">
+      <SideBar handleChange = {handleChange} />
+      <ProductNav query = {query} handleInputChange={handleInputChange} />
       <Recommended handleClick={handleClick} />
       <ProductItem result={result} />
     </div>

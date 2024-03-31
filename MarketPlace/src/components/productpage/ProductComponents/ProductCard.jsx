@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import ChatForm from "./ChatForm";
 import { AiFillStar } from "react-icons/ai";
+import axios from "axios";
 
 const ProductCard = ({
   id,
@@ -16,9 +17,30 @@ const ProductCard = ({
   type,
 }) => {
   const [showChatForm, setShowChatForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000")
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          setIsLoggedIn(true);
+          //setName(res.data.name);
+        } else {
+          setIsLoggedIn(false);
+          setMessage(res.data.Error);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const openChatForm = () => {
-    setShowChatForm(true);
+    if (isLoggedIn) {
+      setShowChatForm(true);
+    } else {
+      alert("Please login first");
+    }
   };
 
   const closeChatForm = () => {

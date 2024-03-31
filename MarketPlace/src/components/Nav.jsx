@@ -37,7 +37,7 @@ const Navbar = () => {
 
   const handleAddProductClick = (event) => {
     if (name !== "shantanu0102") {
-      alert("You are not admin");
+      alert("Cannot add product .. You are not a admin");
       event.preventDefault();
     }
   };

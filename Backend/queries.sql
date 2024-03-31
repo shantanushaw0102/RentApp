@@ -1,11 +1,19 @@
 /* Sql query for the login table */
 
-CREATE TABLE login (
+CREATE TABLE admin_login (
     id serial primary key,
     name varchar(100),
     email varchar(100),
     password varchar(100)
 );
+
+CREATE TABLE user_login (
+    id serial primary key,
+    name varchar(100),
+    email varchar(100),
+    password varchar(100)
+);
+
 
 
 /* sql query for the products */
